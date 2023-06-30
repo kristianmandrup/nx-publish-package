@@ -12,7 +12,32 @@ Install your plugin like any other npm package:
 
 To publish a project (that has been built) to npm
 
-`nx run my-project:publish`
+`nx run myapp:publish`
+
+By default it will use the `outputPath` of the `project.json` for the project, here `dist/myapp`
+
+```json
+{
+  "tags": [],
+  "implicitDependencies": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/myapp",
+        "main": "apps/myapp/src/main.ts",
+        "tsConfig": "apps/myapp/tsconfig.app.json"
+      }
+    }
+  }
+}
+```
+
+If no `build` target `outputPath` is set, it will default to `dist/${projectName}`.
+You can override this automatic build target determination by supplying a `--dist` option if necessary.
+
+`nx run myapp:publish --dist my/dist/myapp`
 
 ## Plugin
 

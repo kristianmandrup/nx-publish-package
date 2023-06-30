@@ -21,11 +21,6 @@ export default async function runExecutor(
   context: ExecutorContext
 ): Promise<{ success: boolean }> {
   const projectName = context.projectName;
-  const projectConfig = context.workspace.projects[context.projectName];
-  const projectBuildTargetFolder =
-    projectConfig.targets['build'].options.outputPath;
-  const buildTargetFolder = options.dist || projectBuildTargetFolder || 'dist';
-  const packageManager = determinePackageManager(context) || 'npm';
 
   if (typeof projectName === 'undefined') {
     logger.error(new Error('Project name is not defined.'));
@@ -40,7 +35,14 @@ export default async function runExecutor(
     process.exit(1);
   }
 
-  const distProjPath = path.join(context.cwd, buildTargetFolder, projectName);
+  const projectConfig = context.workspace.projects[context.projectName];
+  const projectBuildTargetFolder =
+    projectConfig.targets['build'].options.outputPath;
+  const buildTargetFolder =
+    options.dist || projectBuildTargetFolder || `dist/${projectName}`;
+  const packageManager = determinePackageManager(context) || 'npm';
+
+  const distProjPath = path.join(context.cwd, buildTargetFolder);
 
   execSync(`cd ${distProjPath} && ${packageManager} publish --newVersion`, {
     stdio: 'inherit',
