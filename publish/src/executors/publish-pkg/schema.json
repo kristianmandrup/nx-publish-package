@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "title": "PublishPkg executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "dist": {
+      "type": "string",
+      "description": "project build dist destination"
+    }
+  },
+  "required": []
+}

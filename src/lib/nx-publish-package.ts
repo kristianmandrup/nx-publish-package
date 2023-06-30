@@ -1,3 +1,3 @@
 export function nxPublishPackage(): string {
-  return 'nx-publish-package';
+  return 'publish';
 }

@@ -1,1 +1,1 @@
-export * from './lib/nx-publish-package';
+export * from './lib/publish';

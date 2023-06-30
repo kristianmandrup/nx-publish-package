@@ -14,7 +14,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@nx-publish-package/.": ["src/index.ts"]
+      "@nx-publish-package.": ["src/index.ts"],
+      "@nx-publish-packagepublish": ["publish/src/index.ts"]
     },
     "types": ["vitest"]
   },

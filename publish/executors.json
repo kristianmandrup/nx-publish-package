@@ -1,0 +1,9 @@
+{
+  "executors": {
+    "publish-pkg": {
+      "implementation": "./src/executors/publish-pkg/executor",
+      "schema": "./src/executors/publish-pkg/schema.json",
+      "description": "publish-pkg executor"
+    }
+  }
+}
