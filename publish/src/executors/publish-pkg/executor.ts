@@ -22,8 +22,9 @@ export default async function runExecutor(
 ): Promise<{ success: boolean }> {
   const projectName = context.projectName;
   const projectConfig = context.workspace.projects[context.projectName];
-  let buildTargetFolder = projectConfig.targets['build'].options.outputPath;
-  buildTargetFolder = buildTargetFolder || options.dist || 'dist';
+  const projectBuildTargetFolder =
+    projectConfig.targets['build'].options.outputPath;
+  const buildTargetFolder = options.dist || projectBuildTargetFolder || 'dist';
   const packageManager = determinePackageManager(context) || 'npm';
 
   if (typeof projectName === 'undefined') {
@@ -36,7 +37,6 @@ export default async function runExecutor(
 
   if (!isInWorkspace) {
     console.log(`Project ${projectName} is not in the workspace.`);
-
     process.exit(1);
   }
 
