@@ -41,12 +41,15 @@ export default async function runExecutor(
   const buildTargetFolder =
     options.dist || projectBuildTargetFolder || `dist/${projectName}`;
   const packageManager = determinePackageManager(context) || 'npm';
+  const currentWorkingDir = context.cwd;
+  const distProjPath = path.join(currentWorkingDir, buildTargetFolder);
 
-  const distProjPath = path.join(context.cwd, buildTargetFolder);
-
-  execSync(`cd ${distProjPath} && ${packageManager} publish --newVersion`, {
-    stdio: 'inherit',
-  });
+  execSync(
+    `cd ${distProjPath} && ${packageManager} publish --newVersion && cd ${currentWorkingDir}`,
+    {
+      stdio: 'inherit',
+    }
+  );
 
   return { success: true };
 }
